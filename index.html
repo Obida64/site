@@ -8,67 +8,62 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(135deg, #141e30, #243b55);
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      text-align: center;
-      padding: 40px 20px;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
-
-    h1, p, .buttons, .language-toggle, .countdown, .bonus-banner, .players-counter {
+    h2, p {
+      margin: 10px 0;
       opacity: 0;
-      transform: translateY(20px);
       animation: fadeInUp 1s forwards;
     }
-    .language-toggle { animation-delay: 0.2s; }
-    .bonus-banner { animation-delay: 0.4s; }
-    .countdown { animation-delay: 0.6s; }
-    .players-counter { animation-delay: 0.8s; }
-    .buttons { animation-delay: 1s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    h2 {
+      font-size: 1.5em;
+      animation-delay: 0.2s;
     }
-
-    .language-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+    p {
+      font-size: 1.1em;
+      animation-delay: 0.4s;
     }
-
-    .language-toggle button {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    a.image-link img {
-      max-width: 320px;
-      width: 100%;
+    a.image-link {
+      display: inline-block;
       border-radius: 16px;
+      overflow: hidden;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      margin: 1.5em 0;
       transition: transform 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.6s;
     }
-
-    a.image-link:hover img {
+    a.image-link:hover {
       transform: scale(1.05);
     }
-
+    img {
+      max-width: 320px;
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+    .buttons {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.8s;
+    }
     .buttons a {
-      display: inline-block;
       padding: 0.8em 1.5em;
       background-color: #00bcd4;
       color: white;
@@ -76,115 +71,81 @@
       border-radius: 30px;
       font-weight: bold;
       transition: background 0.3s ease;
-      margin: 5px;
+      user-select: none;
     }
-
     .buttons a:hover {
       background-color: #0097a7;
     }
-
-    .bonus-banner {
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #FFD700;
+    /* Видео блок */
+    .video-container {
+      margin-top: 2em;
+      max-width: 360px;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 1s;
     }
-
-    .countdown {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #00e5ff;
+    video {
+      width: 100%;
+      display: block;
     }
-
-    .players-counter {
+    .video-caption {
+      margin-top: 0.5em;
       font-size: 1em;
-      color: #cccccc;
+      color: #a0e9ff;
     }
-
-    #bonus-popup {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #00bcd4;
-      color: white;
-      padding: 1em 2em;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      display: none;
-      z-index: 999;
-      font-weight: bold;
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.2em;
+      }
+      p {
+        font-size: 1em;
+        padding: 0 10px;
+      }
+      img {
+        max-width: 90vw;
+      }
+      .buttons a {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+      .video-container {
+        max-width: 90vw;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="language-toggle">
-    <button onclick="switchLanguage()">EN / RU</button>
-  </div>
-
-  <div class="bonus-banner" id="bonus-text">🎁 Бонус на первый депозит +500%! Используй промокод: NF11</div>
-
-  <div class="countdown" id="countdown">⏳ Бонус доступен еще: 10:00</div>
-
-  <div class="players-counter" id="players-online">🔵 Сейчас играют: 1327</div>
-
-  <a href="https://1wprde.com" target="_blank" class="image-link">
+  <h2>🔥 Бонус +500% на первый депозит! Используйте промокод <strong>NF11</strong></h2>
+  <p>Не упустите шанс увеличить свой первый депозит в 5 раз!</p>
+  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer">
     <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
   </a>
-
   <div class="buttons">
-    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank">Telegram</a>
-    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank">Instagram</a>
-    <a href="https://1wprde.com" target="_blank">Играть сейчас</a>
+    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
+    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer">Играть сейчас</a>
   </div>
 
-  <div id="bonus-popup">🎉 Не упусти бонус +500%! Промокод: NF11</div>
-
-  <script>
-    let lang = 'ru';
-    function switchLanguage() {
-      lang = lang === 'ru' ? 'en' : 'ru';
-      document.getElementById('bonus-text').textContent = lang === 'ru'
-        ? '🎁 Бонус на первый депозит +500%! Используй промокод: NF11'
-        : '🎁 500% First Deposit Bonus! Use promo code: NF11';
-      document.getElementById('players-online').textContent = lang === 'ru'
-        ? '🔵 Сейчас играют: ' + playersCount
-        : '🔵 Currently playing: ' + playersCount;
-    }
-
-    // Countdown timer
-    let timeLeft = 600;
-    const countdownEl = document.getElementById('countdown');
-    function updateCountdown() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      countdownEl.textContent = (lang === 'ru' ? '⏳ Бонус доступен еще: ' : '⏳ Bonus available for: ') + `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-      if (timeLeft > 0) timeLeft--;
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // Online players
-    let playersCount = 1327;
-    function updatePlayersOnline() {
-      const fluctuation = Math.floor(Math.random() * 20) - 10;
-      playersCount += fluctuation;
-      document.getElementById("players-online").textContent = lang === 'ru'
-        ? `🔵 Сейчас играют: ${playersCount}`
-        : `🔵 Currently playing: ${playersCount}`;
-    }
-    setInterval(updatePlayersOnline, 5000);
-
-    // Exit intent popup
-    document.addEventListener("mouseout", function (e) {
-      if (!e.toElement && !e.relatedTarget && e.clientY < 50) {
-        alert("⚡ Подожди! Ты ещё можешь забрать бонус +500% с промокодом NF11");
-      }
-    });
-
-    // Bonus popup after delay
-    setTimeout(() => {
-      document.getElementById('bonus-popup').style.display = 'block';
-    }, 5000);
-  </script>
+  <div class="video-container">
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.pixabay.com/vimeo/508560768/slot-machines-52462.mp4?width=640&hash=1d8e2d1e6f7d6b3d3e6e1b2c4e2c0a3c0c5f56f8" type="video/mp4" />
+      Ваш браузер не поддерживает видео.
+    </video>
+    <div class="video-caption">Смотрите, как наши игроки выигрывают реальные деньги!</div>
+  </div>
 </body>
 </html>
