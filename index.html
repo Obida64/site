@@ -126,12 +126,13 @@
   </div>
 
   <div class="timer-container">
-    <span class="text" data-ru="🔥 Бонус доступен ещё:" data-en="🔥 Bonus available for:"></span>
+    <span id="timer-text" data-ru="🔥 Бонус доступен ещё:" data-en="🔥 Bonus available for:">🔥 Бонус доступен ещё:</span>
     <span id="countdown">10:00</span>
   </div>
 
-  <p class="main-text" data-ru="Получи +500% к первому депозиту! Используй промокод: NF11"
-                        data-en="Get +500% on your first deposit! Use promo code: NF11">
+  <p class="main-text" 
+     data-ru="Получи +500% к первому депозиту! Используй промокод: NF11"
+     data-en="Get +500% on your first deposit! Use promo code: NF11">
     Получи +500% к первому депозиту! Используй промокод: NF11
   </p>
 
@@ -160,14 +161,22 @@
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
-    // Переключатель языка
+    // Языковой переключатель
     let currentLang = 'ru';
-    function toggleLanguage() {
-      currentLang = currentLang === 'ru' ? 'en' : 'ru';
-      document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
-        el.textContent = el.getAttribute('data-' + currentLang);
+    function applyLanguage(lang) {
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
       });
     }
+    function toggleLanguage() {
+      currentLang = currentLang === 'ru' ? 'en' : 'ru';
+      applyLanguage(currentLang);
+    }
+
+    // Установить язык при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+      applyLanguage(currentLang);
+    });
   </script>
 </body>
 </html>
