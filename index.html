@@ -8,29 +8,30 @@
   <style>
     body {
       margin: 0;
-      padding: 20px;
       height: 100vh;
       background: linear-gradient(135deg, #141e30, #243b55);
       font-family: 'Segoe UI', sans-serif;
       color: white;
       text-align: center;
+      padding: 40px 20px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      overflow-x: hidden;
+      justify-content: center;
+      gap: 20px;
     }
 
-    .fade-in-up {
+    h1, p, .buttons, .language-toggle, .countdown, .bonus-banner, .players-counter {
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 1s ease-out forwards;
+      animation: fadeInUp 1s forwards;
     }
-
-    .fade-delay-1 { animation-delay: 0.3s; }
-    .fade-delay-2 { animation-delay: 0.6s; }
-    .fade-delay-3 { animation-delay: 0.9s; }
+    .language-toggle { animation-delay: 0.2s; }
+    .bonus-banner { animation-delay: 0.4s; }
+    .countdown { animation-delay: 0.6s; }
+    .players-counter { animation-delay: 0.8s; }
+    .buttons { animation-delay: 1s; }
 
     @keyframes fadeInUp {
       to {
@@ -39,77 +40,35 @@
       }
     }
 
-    .language-switch {
+    .language-toggle {
       position: absolute;
       top: 20px;
       right: 20px;
-      z-index: 10;
     }
 
-    .language-switch button {
-      background: #00bcd4;
-      border: none;
+    .language-toggle button {
+      background: transparent;
+      border: 2px solid white;
       color: white;
-      padding: 0.4em 1em;
-      border-radius: 20px;
-      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
-    .language-switch button:hover {
-      background: #0097a7;
-    }
-
-    .timer-container {
-      font-size: 1.5em;
-      margin-bottom: 1em;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 0.8em 1.2em;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    #countdown {
-      font-weight: bold;
-      color: #00ffcc;
-    }
-
-    .main-text {
-      max-width: 600px;
-      margin-bottom: 1.2em;
-      font-size: 1.2em;
-    }
-
-    a.image-link {
-      display: inline-block;
+    a.image-link img {
+      max-width: 320px;
+      width: 100%;
       border-radius: 16px;
-      overflow: hidden;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      margin-bottom: 1.5em;
       transition: transform 0.3s ease;
     }
 
-    a.image-link:hover {
+    a.image-link:hover img {
       transform: scale(1.05);
     }
 
-    img {
-      max-width: 320px;
-      width: 100%;
-      display: block;
-      border-radius: 16px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 1em;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 1.5em;
-    }
-
     .buttons a {
+      display: inline-block;
       padding: 0.8em 1.5em;
       background-color: #00bcd4;
       color: white;
@@ -117,84 +76,115 @@
       border-radius: 30px;
       font-weight: bold;
       transition: background 0.3s ease;
-      user-select: none;
+      margin: 5px;
     }
 
     .buttons a:hover {
       background-color: #0097a7;
     }
 
-    @media (max-width: 480px) {
-      .main-text {
-        font-size: 1em;
-        padding: 0 10px;
-      }
-      img {
-        max-width: 90vw;
-      }
-      .buttons a {
-        flex: 1 1 100%;
-        text-align: center;
-      }
+    .bonus-banner {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    .countdown {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #00e5ff;
+    }
+
+    .players-counter {
+      font-size: 1em;
+      color: #cccccc;
+    }
+
+    #bonus-popup {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00bcd4;
+      color: white;
+      padding: 1em 2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 999;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="language-switch">
-    <button onclick="toggleLanguage()">EN / RU</button>
+  <div class="language-toggle">
+    <button onclick="switchLanguage()">EN / RU</button>
   </div>
 
-  <div class="timer-container fade-in-up fade-delay-1">
-    <span id="timer-text" data-ru="🔥 Бонус доступен ещё:" data-en="🔥 Bonus available for:">🔥 Бонус доступен ещё:</span>
-    <span id="countdown">10:00</span>
-  </div>
+  <div class="bonus-banner" id="bonus-text">🎁 Бонус на первый депозит +500%! Используй промокод: NF11</div>
 
-  <p class="main-text fade-in-up fade-delay-2"
-     data-ru="Получи +500% к первому депозиту! Используй промокод: NF11"
-     data-en="Get +500% on your first deposit! Use promo code: NF11">
-    Получи +500% к первому депозиту! Используй промокод: NF11
-  </p>
+  <div class="countdown" id="countdown">⏳ Бонус доступен еще: 10:00</div>
 
-  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank"
-     class="image-link fade-in-up fade-delay-3" rel="noopener noreferrer">
+  <div class="players-counter" id="players-online">🔵 Сейчас играют: 1327</div>
+
+  <a href="https://1wprde.com" target="_blank" class="image-link">
     <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
   </a>
 
-  <div class="buttons fade-in-up fade-delay-3">
-    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
-    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer"
-       data-ru="Играть сейчас" data-en="Play Now">Играть сейчас</a>
+  <div class="buttons">
+    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank">Telegram</a>
+    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank">Instagram</a>
+    <a href="https://1wprde.com" target="_blank">Играть сейчас</a>
   </div>
 
-  <script>
-    // Таймер
-    let time = 10 * 60;
-    const countdownEl = document.getElementById('countdown');
-    function updateTimer() {
-      const minutes = Math.floor(time / 60);
-      const seconds = time % 60;
-      countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      if (time > 0) time--;
-      else clearInterval(timerInterval);
-    }
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
+  <div id="bonus-popup">🎉 Не упусти бонус +500%! Промокод: NF11</div>
 
-    // Язык
-    let currentLang = 'ru';
-    function applyLanguage(lang) {
-      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-        el.textContent = el.getAttribute('data-' + lang);
-      });
+  <script>
+    let lang = 'ru';
+    function switchLanguage() {
+      lang = lang === 'ru' ? 'en' : 'ru';
+      document.getElementById('bonus-text').textContent = lang === 'ru'
+        ? '🎁 Бонус на первый депозит +500%! Используй промокод: NF11'
+        : '🎁 500% First Deposit Bonus! Use promo code: NF11';
+      document.getElementById('players-online').textContent = lang === 'ru'
+        ? '🔵 Сейчас играют: ' + playersCount
+        : '🔵 Currently playing: ' + playersCount;
     }
-    function toggleLanguage() {
-      currentLang = currentLang === 'ru' ? 'en' : 'ru';
-      applyLanguage(currentLang);
+
+    // Countdown timer
+    let timeLeft = 600;
+    const countdownEl = document.getElementById('countdown');
+    function updateCountdown() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      countdownEl.textContent = (lang === 'ru' ? '⏳ Бонус доступен еще: ' : '⏳ Bonus available for: ') + `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      if (timeLeft > 0) timeLeft--;
     }
-    window.addEventListener('DOMContentLoaded', () => {
-      applyLanguage(currentLang);
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Online players
+    let playersCount = 1327;
+    function updatePlayersOnline() {
+      const fluctuation = Math.floor(Math.random() * 20) - 10;
+      playersCount += fluctuation;
+      document.getElementById("players-online").textContent = lang === 'ru'
+        ? `🔵 Сейчас играют: ${playersCount}`
+        : `🔵 Currently playing: ${playersCount}`;
+    }
+    setInterval(updatePlayersOnline, 5000);
+
+    // Exit intent popup
+    document.addEventListener("mouseout", function (e) {
+      if (!e.toElement && !e.relatedTarget && e.clientY < 50) {
+        alert("⚡ Подожди! Ты ещё можешь забрать бонус +500% с промокодом NF11");
+      }
     });
+
+    // Bonus popup after delay
+    setTimeout(() => {
+      document.getElementById('bonus-popup').style.display = 'block';
+    }, 5000);
   </script>
 </body>
 </html>
