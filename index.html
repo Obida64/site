@@ -8,89 +8,78 @@
   <style>
     body {
       margin: 0;
-      padding: 0 20px;
+      padding: 20px;
       height: 100vh;
       background: linear-gradient(135deg, #141e30, #243b55);
       font-family: 'Segoe UI', sans-serif;
       color: white;
+      text-align: center;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      box-sizing: border-box;
-      text-align: center;
+      align-items: center;
     }
 
-    .lang-switch {
+    .language-switch {
       position: absolute;
       top: 20px;
       right: 20px;
     }
 
-    .lang-switch button {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .lang-switch button:hover {
-      background: white;
-      color: #243b55;
-    }
-
-    .cta-bonus {
+    .language-switch button {
       background: #00bcd4;
-      padding: 1em 1.5em;
-      border-radius: 30px;
+      border: none;
+      color: white;
+      padding: 0.4em 1em;
+      border-radius: 20px;
       font-weight: bold;
-      font-size: 1.2em;
-      color: #243b55;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .language-switch button:hover {
+      background: #0097a7;
+    }
+
+    .timer-container {
+      font-size: 1.5em;
       margin-bottom: 1em;
-      max-width: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.8em 1.2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    .promo-code {
-      font-weight: 900;
-      color: #ffd700;
-    }
-
-    .btn-promo {
-      display: inline-block;
-      margin-bottom: 1.5em;
-      background-color: #ffd700;
-      color: #243b55;
-      padding: 0.8em 2em;
-      border-radius: 30px;
+    #countdown {
       font-weight: bold;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
+      color: #00ffcc;
     }
 
-    .btn-promo:hover {
-      background-color: #e6c200;
+    .main-text {
+      max-width: 600px;
+      margin-bottom: 1.2em;
+      font-size: 1.2em;
     }
 
-    .image-link {
-      display: block;
-      margin-bottom: 1.5em;
+    a.image-link {
+      display: inline-block;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      margin-bottom: 1.5em;
       transition: transform 0.3s ease;
     }
 
-    .image-link:hover {
-      transform: scale(1.03);
+    a.image-link:hover {
+      transform: scale(1.05);
     }
 
     img {
       max-width: 320px;
       width: 100%;
       display: block;
+      border-radius: 16px;
     }
 
     .buttons {
@@ -98,6 +87,7 @@
       gap: 1em;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 1.5em;
     }
 
     .buttons a {
@@ -108,6 +98,7 @@
       border-radius: 30px;
       font-weight: bold;
       transition: background 0.3s ease;
+      user-select: none;
     }
 
     .buttons a:hover {
@@ -115,19 +106,13 @@
     }
 
     @media (max-width: 480px) {
-      .cta-bonus {
+      .main-text {
         font-size: 1em;
-        max-width: 90vw;
+        padding: 0 10px;
       }
-
-      .btn-promo {
-        padding: 0.7em 1.5em;
-      }
-
       img {
         max-width: 90vw;
       }
-
       .buttons a {
         flex: 1 1 100%;
         text-align: center;
@@ -136,62 +121,53 @@
   </style>
 </head>
 <body>
-  <div class="lang-switch">
-    <button id="langToggle">EN</button>
+  <div class="language-switch">
+    <button onclick="toggleLanguage()">EN / RU</button>
   </div>
 
-  <div class="cta-bonus" id="bonusText">
-    Бонус на первый депозит <span class="promo-code">+500%</span>! Промокод: <span class="promo-code">NF11</span>
+  <div class="timer-container">
+    <span class="text" data-ru="🔥 Бонус доступен ещё:" data-en="🔥 Bonus available for:"></span>
+    <span id="countdown">10:00</span>
   </div>
 
-  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi&promo=NF11" target="_blank" class="btn-promo" id="btnPromo">
-    Использовать промокод
-  </a>
+  <p class="main-text" data-ru="Получи +500% к первому депозиту! Используй промокод: NF11"
+                        data-en="Get +500% on your first deposit! Use promo code: NF11">
+    Получи +500% к первому депозиту! Используй промокод: NF11
+  </p>
 
   <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer">
     <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
   </a>
 
   <div class="buttons">
-    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" id="btnTelegram">Telegram</a>
-    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" id="btnInstagram">Instagram</a>
-    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" id="btnPlay">Играть</a>
+    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
+    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer"
+       data-ru="Играть сейчас" data-en="Play Now">Играть сейчас</a>
   </div>
 
   <script>
-    const langToggleBtn = document.getElementById('langToggle');
+    // Таймер 10 минут
+    let time = 10 * 60;
+    const countdownEl = document.getElementById('countdown');
+    function updateTimer() {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      if (time > 0) time--;
+      else clearInterval(timerInterval);
+    }
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
 
-    const texts = {
-      ru: {
-        bonusText: 'Бонус на первый депозит <span class="promo-code">+500%</span>! Промокод: <span class="promo-code">NF11</span>',
-        btnPromo: 'Использовать промокод',
-        btnTelegram: 'Telegram',
-        btnInstagram: 'Instagram',
-        btnPlay: 'Играть',
-        langBtn: 'EN'
-      },
-      en: {
-        bonusText: 'First deposit bonus <span class="promo-code">+500%</span>! Promo code: <span class="promo-code">NF11</span>',
-        btnPromo: 'Use Promo Code',
-        btnTelegram: 'Telegram',
-        btnInstagram: 'Instagram',
-        btnPlay: 'Play',
-        langBtn: 'RU'
-      }
-    };
-
+    // Переключатель языка
     let currentLang = 'ru';
-
-    langToggleBtn.addEventListener('click', () => {
+    function toggleLanguage() {
       currentLang = currentLang === 'ru' ? 'en' : 'ru';
-
-      document.getElementById('bonusText').innerHTML = texts[currentLang].bonusText;
-      document.getElementById('btnPromo').textContent = texts[currentLang].btnPromo;
-      document.getElementById('btnTelegram').textContent = texts[currentLang].btnTelegram;
-      document.getElementById('btnInstagram').textContent = texts[currentLang].btnInstagram;
-      document.getElementById('btnPlay').textContent = texts[currentLang].btnPlay;
-      langToggleBtn.textContent = texts[currentLang].langBtn;
-    });
+      document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+      });
+    }
   </script>
 </body>
 </html>
