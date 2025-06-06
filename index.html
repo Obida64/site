@@ -119,12 +119,41 @@
       transition: background 0.3s ease, transform 0.3s ease;
       user-select: none;
       display: inline-block;
+      cursor: pointer;
     }
 
     .buttons a:hover {
       background-color: #0097a7;
       transform: translateY(-4px);
       box-shadow: 0 8px 15px rgba(0, 188, 212, 0.6);
+    }
+
+    /* Пульсирующая анимация для кнопки "Играть сейчас" */
+    .buttons a.pulse {
+      animation: pulse-animation 2s infinite;
+      box-shadow: 0 0 8px 0 rgba(0, 188, 212, 0.7);
+    }
+
+    .buttons a.pulse:hover {
+      animation-play-state: paused;
+      background-color: #007f91;
+      box-shadow: 0 12px 20px rgba(0, 188, 212, 0.9);
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    @keyframes pulse-animation {
+      0% {
+        box-shadow: 0 0 8px 0 rgba(0, 188, 212, 0.7);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 20px 8px rgba(0, 188, 212, 0.5);
+        transform: scale(1.05);
+      }
+      100% {
+        box-shadow: 0 0 8px 0 rgba(0, 188, 212, 0.7);
+        transform: scale(1);
+      }
     }
 
     @media (max-width: 480px) {
@@ -166,7 +195,7 @@
   <div class="buttons fade-in-up fade-delay-3">
     <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
     <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://1wprde.com" target="_blank" rel="noopener noreferrer"
+    <a href="https://1wprde.com" target="_blank" rel="noopener noreferrer" class="pulse"
        data-ru="Играть сейчас" data-en="Play Now">Играть сейчас</a>
   </div>
 
