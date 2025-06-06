@@ -234,7 +234,7 @@
     function updateTimer() {
       const minutes = Math.floor(time / 60);
       const seconds = time % 60;
-      countdownEl.textContent = ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')};
+      countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       if (time > 0) time--;
       else clearInterval(timerInterval);
     }
@@ -251,6 +251,24 @@
     function toggleLanguage() {
       currentLang = currentLang === 'ru' ? 'en' : 'ru';
       applyLanguage(currentLang);
+
+      // После смены языка обновим тексты с динамическими числами
+      const usageEl = document.getElementById('promo-usage');
+      const bonusLeftEl = document.getElementById('bonus-left-counter');
+
+      const minUsage = 1000, maxUsage = 2000;
+      const minLeft = 10, maxLeft = 30;
+
+      const randomUsage = Math.floor(Math.random() * (maxUsage - minUsage + 1)) + minUsage;
+      const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
+
+      if (currentLang === 'ru') {
+        usageEl.textContent = `Промокод использовали уже ${randomUsage} раз!`;
+        bonusLeftEl.textContent = `Осталось ${randomLeft} бонусов из 100`;
+      } else {
+        usageEl.textContent = `Promo code used ${randomUsage} times already!`;
+        bonusLeftEl.textContent = `${randomLeft} bonuses left out of 100`;
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -267,11 +285,11 @@
         const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
 
         if (currentLang === 'ru') {
-          usageEl.textContent = Промокод использовали уже ${randomUsage} раз!;
-          bonusLeftEl.textContent = Осталось ${randomLeft} бонусов из 100;
+          usageEl.textContent = `Промокод использовали уже ${randomUsage} раз!`;
+          bonusLeftEl.textContent = `Осталось ${randomLeft} бонусов из 100`;
         } else {
-          usageEl.textContent = Promo code used ${randomUsage} times already!;
-          bonusLeftEl.textContent = ${randomLeft} bonuses left out of 100;
+          usageEl.textContent = `Promo code used ${randomUsage} times already!`;
+          bonusLeftEl.textContent = `${randomLeft} bonuses left out of 100`;
         }
       }, 1400);
     });
