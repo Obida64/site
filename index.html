@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avia MASTERS</title>
+  <link rel="icon" href="https://www.casinowow.com/media/uploads/Aviamasters-Icon-190x190.png" type="image/png">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2em 1em;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.3em;
+    }
+
+    p {
+      font-size: 1.1em;
+      max-width: 90%;
+      margin: 0 auto 1.5em;
+    }
+
+    .image-link img {
+      width: 90%;
+      max-width: 320px;
+      border-radius: 16px;
+      margin-bottom: 1.5em;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .image-link img:hover {
+      transform: scale(1.03);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1em;
+    }
+
+    .buttons a {
+      padding: 0.8em 1.5em;
+      background-color: #00bcd4;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .buttons a:hover {
+      background-color: #0097a7;
+      transform: translateY(-2px);
+    }
+
+    .language-switch {
+      margin-top: 1em;
+    }
+
+    .language-switch button {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      margin: 0 0.5em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .language-switch button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+
+    .lang {
+      display: none;
+    }
+
+    .lang.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- RU контент -->
+  <div class="lang lang-ru active">
+    <h1>Добро пожаловать!</h1>
+    <p>Это официальный сайт Avia Masters. Жми ниже и играй прямо сейчас!</p>
+    <a href="https://1wzyuh.com/casino/play/v_bgaming:Aviamasters" target="_blank" class="image-link">
+      <img src="https://i.ytimg.com/vi/qOfIA2gf9Mk/maxresdefault.jpg" alt="Avia Masters">
+    </a>
+    <div class="buttons">
+      <a href="https://t.me/your_username" target="_blank">Telegram</a>
+      <a href="https://instagram.com/your_username" target="_blank">Instagram</a>
+      <a href="https://1wzyuh.com/casino/play/v_bgaming:Aviamasters" target="_blank">Играть сейчас</a>
+    </div>
+  </div>
+
+  <!-- EN контент -->
+  <div class="lang lang-en">
+    <h1>Welcome!</h1>
+    <p>This is the official Avia Masters site. Tap below to play now!</p>
+    <a href="https://1wzyuh.com/casino/play/v_bgaming:Aviamasters" target="_blank" class="image-link">
+      <img src="https://i.ytimg.com/vi/qOfIA2gf9Mk/maxresdefault.jpg" alt="Avia Masters">
+    </a>
+    <div class="buttons">
+      <a href="https://t.me/your_username" target="_blank">Telegram</a>
+      <a href="https://instagram.com/your_username" target="_blank">Instagram</a>
+      <a href="https://1wzyuh.com/casino/play/v_bgaming:Aviamasters" target="_blank">Play Now</a>
+    </div>
+  </div>
+
+  <!-- Переключатель языков -->
+  <div class="language-switch">
+    <button onclick="setLanguage('ru')">🇷🇺 Русский</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
+  </div>
+
+  <script>
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.lang-${lang}`).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
