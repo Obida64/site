@@ -19,12 +19,31 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      overflow-x: hidden;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .fade-delay-1 { animation-delay: 0.3s; }
+    .fade-delay-2 { animation-delay: 0.6s; }
+    .fade-delay-3 { animation-delay: 0.9s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .language-switch {
       position: absolute;
       top: 20px;
       right: 20px;
+      z-index: 10;
     }
 
     .language-switch button {
@@ -125,22 +144,23 @@
     <button onclick="toggleLanguage()">EN / RU</button>
   </div>
 
-  <div class="timer-container">
+  <div class="timer-container fade-in-up fade-delay-1">
     <span id="timer-text" data-ru="🔥 Бонус доступен ещё:" data-en="🔥 Bonus available for:">🔥 Бонус доступен ещё:</span>
     <span id="countdown">10:00</span>
   </div>
 
-  <p class="main-text" 
+  <p class="main-text fade-in-up fade-delay-2"
      data-ru="Получи +500% к первому депозиту! Используй промокод: NF11"
      data-en="Get +500% on your first deposit! Use promo code: NF11">
     Получи +500% к первому депозиту! Используй промокод: NF11
   </p>
 
-  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer">
+  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank"
+     class="image-link fade-in-up fade-delay-3" rel="noopener noreferrer">
     <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
   </a>
 
-  <div class="buttons">
+  <div class="buttons fade-in-up fade-delay-3">
     <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
     <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer"
@@ -148,7 +168,7 @@
   </div>
 
   <script>
-    // Таймер 10 минут
+    // Таймер
     let time = 10 * 60;
     const countdownEl = document.getElementById('countdown');
     function updateTimer() {
@@ -161,7 +181,7 @@
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
-    // Языковой переключатель
+    // Язык
     let currentLang = 'ru';
     function applyLanguage(lang) {
       document.querySelectorAll('[data-' + lang + ']').forEach(el => {
@@ -172,8 +192,6 @@
       currentLang = currentLang === 'ru' ? 'en' : 'ru';
       applyLanguage(currentLang);
     }
-
-    // Установить язык при загрузке
     window.addEventListener('DOMContentLoaded', () => {
       applyLanguage(currentLang);
     });
