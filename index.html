@@ -20,6 +20,7 @@
       justify-content: center;
       align-items: center;
       overflow-x: hidden;
+      position: relative;
     }
 
     .pop-in {
@@ -43,7 +44,7 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      z-index: 10;
+      z-index: 20;
     }
 
     .language-switch button {
@@ -182,6 +183,69 @@
         text-align: center;
       }
     }
+
+    /* --- Модальное окно подписки на Telegram --- */
+    #subscribeModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #subscribeModal .modal-content {
+      background: #142f4d;
+      padding: 30px 25px;
+      border-radius: 14px;
+      max-width: 380px;
+      width: 90%;
+      color: white;
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    #subscribeModal h2 {
+      margin-bottom: 15px;
+      font-size: 1.8em;
+      color: #00ffcc;
+    }
+
+    #subscribeModal p {
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    #subscribeModal a.telegram-link {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #00bcd4;
+      color: white;
+      font-weight: 700;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease;
+    }
+
+    #subscribeModal a.telegram-link:hover {
+      background-color: #0097a7;
+    }
+
+    #subscribeModal button.close-btn {
+      margin-top: 20px;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
   </style>
 </head>
 <body>
@@ -228,9 +292,24 @@
        data-ru="Играть сейчас" data-en="Play Now">Играть сейчас</a>
   </div>
 
+  <!-- Всплывающее окно подписки на Telegram -->
+  <div id="subscribeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div class="modal-content">
+      <h2 id="modalTitle" data-ru="🎁 Получи бонус прямо сейчас!" data-en="🎁 Get your bonus right now!">🎁 Получи бонус прямо сейчас!</h2>
+      <p id="modalDesc" data-ru="Подпишись на наш Telegram-канал и получи эксклюзивный бонус 🎉" data-en="Subscribe to our Telegram channel and get an exclusive bonus 🎉">
+        Подпишись на наш Telegram-канал и получи эксклюзивный бонус 🎉
+      </p>
+      <a class="telegram-link" href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer" data-ru="Перейти в Telegram" data-en="Go to Telegram">Перейти в Telegram</a>
+      <br />
+      <button class="close-btn" aria-label="Закрыть всплывающее окно" data-ru="Закрыть" data-en="Close">Закрыть</button>
+    </div>
+  </div>
+
   <script>
+    // Таймер обратного отсчёта
     let time = 10 * 60;
     const countdownEl = document.getElementById('countdown');
+
     function updateTimer() {
       const minutes = Math.floor(time / 60);
       const seconds = time % 60;
@@ -241,6 +320,7 @@
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
+    // Языковая логика
     let currentLang = 'ru';
     function applyLanguage(lang) {
       document.querySelectorAll('[data-' + lang + ']').forEach(el => {
@@ -251,8 +331,10 @@
     function toggleLanguage() {
       currentLang = currentLang === 'ru' ? 'en' : 'ru';
       applyLanguage(currentLang);
+    }
 
-      // После смены языка обновим тексты с динамическими числами
+    // Рандомное обновление счетчиков использований
+    function updateUsageTexts() {
       const usageEl = document.getElementById('promo-usage');
       const bonusLeftEl = document.getElementById('bonus-left-counter');
 
@@ -273,25 +355,24 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       applyLanguage(currentLang);
+      updateUsageTexts();
 
+      // Показ модального окна через 5 секунд
       setTimeout(() => {
-        const usageEl = document.getElementById('promo-usage');
-        const bonusLeftEl = document.getElementById('bonus-left-counter');
+        document.getElementById('subscribeModal').style.display = 'flex';
+      }, 5000);
+    });
 
-        const minUsage = 1000, maxUsage = 2000;
-        const minLeft = 10, maxLeft = 30;
+    // Закрытие модального окна кнопкой
+    document.querySelector('#subscribeModal .close-btn').addEventListener('click', () => {
+      document.getElementById('subscribeModal').style.display = 'none';
+    });
 
-        const randomUsage = Math.floor(Math.random() * (maxUsage - minUsage + 1)) + minUsage;
-        const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
-
-        if (currentLang === 'ru') {
-          usageEl.textContent = `Промокод использовали уже ${randomUsage} раз!`;
-          bonusLeftEl.textContent = `Осталось ${randomLeft} бонусов из 100`;
-        } else {
-          usageEl.textContent = `Promo code used ${randomUsage} times already!`;
-          bonusLeftEl.textContent = `${randomLeft} bonuses left out of 100`;
-        }
-      }, 1400);
+    // Закрытие модального окна кликом вне контента
+    document.getElementById('subscribeModal').addEventListener('click', e => {
+      if (e.target === document.getElementById('subscribeModal')) {
+        document.getElementById('subscribeModal').style.display = 'none';
+      }
     });
   </script>
 </body>
