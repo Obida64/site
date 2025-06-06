@@ -3,209 +3,456 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Avia MASTERS</title>
+  <title>Avia MASTERS — Бонус +500% за первый депозит!</title>
   <link rel="icon" href="https://www.casinowow.com/media/uploads/Aviamasters-Icon-190x190.png" />
+  
+  <!-- SEO + Open Graph -->
+  <meta name="description" content="Получите бонус +500% на первый депозит с промокодом NF11. Играй сейчас на Avia MASTERS!">
+  <meta property="og:title" content="Avia MASTERS — Бонус +500% на первый депозит!"/>
+  <meta property="og:description" content="Используй промокод NF11 и получи супербонус. Играйте прямо сейчас!"/>
+  <meta property="og:image" content="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg"/>
+  <meta property="og:type" content="website"/>
+  
+  <!-- Preload важных ресурсов -->
+  <link rel="preload" href="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" as="image" />
+  
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
+    /* Reset + базовые стили */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #141e30, #243b55);
-      font-family: 'Segoe UI', sans-serif;
       color: white;
+      overflow-x: hidden;
+    }
+
+    /* Параллакс-блок */
+    .parallax-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('https://raw.githubusercontent.com/Obida64/site/main/avia.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      filter: brightness(0.3);
+      z-index: -1;
+      transform: translateZ(0);
+    }
+
+    .container {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 30px 15px;
       text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-x: hidden;
+      position: relative;
+      z-index: 10;
     }
-    h2, p, #bonus-info, #promo-code, #timer, .buttons, a.image-link {
+
+    /* Языковой переключатель */
+    .lang-switch {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
+      padding: 5px 12px;
+      user-select: none;
+      display: flex;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 15px;
+      transition: background 0.3s ease;
+    }
+    .lang-switch button.active, .lang-switch button:hover {
+      background: #00bcd4;
+      color: #001f27;
+    }
+
+    /* Заголовок */
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    p {
+      max-width: 520px;
+      font-size: 1.2rem;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease forwards;
       opacity: 0;
-      animation: fadeInUp 1s forwards;
     }
-    h2 { animation-delay: 0.2s; font-size: 1.5em; margin-bottom: 0.2em; }
-    #bonus-info { animation-delay: 0.4s; font-size: 1.2em; margin-bottom: 0.3em; }
-    #promo-code { animation-delay: 0.5s; font-weight: bold; margin-bottom: 1.5em; font-size: 1.1em; }
-    a.image-link { 
+    p.visible {
+      opacity: 1;
+    }
+
+    /* Кнопка играть */
+    .btn-play {
+      display: inline-block;
+      background-color: #00bcd4;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      border-radius: 30px;
+      box-shadow: 0 6px 12px rgba(0,188,212,0.6);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s ease;
+      user-select: none;
+      margin-bottom: 25px;
+    }
+    .btn-play.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .btn-play:hover {
+      background-color: #0097a7;
+      box-shadow: 0 8px 16px rgba(0,147,167,0.8);
+    }
+
+    /* Изображение */
+    .image-link {
       display: inline-block;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      margin-bottom: 1.5em;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
       transition: transform 0.3s ease;
-      animation-delay: 0.6s;
     }
-    a.image-link:hover { transform: scale(1.05); }
-    img {
+    .image-link:hover {
+      transform: scale(1.05);
+    }
+    .image-link img {
       max-width: 320px;
       width: 100%;
       display: block;
       border-radius: 16px;
     }
-    .buttons {
-      display: flex;
-      gap: 1em;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation-delay: 0.7s;
-      margin-bottom: 2em;
-    }
-    .buttons a {
-      padding: 0.8em 1.5em;
-      background-color: #00bcd4;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: background 0.3s ease;
+
+    /* Таймер */
+    .timer-container {
+      width: 320px;
+      max-width: 90vw;
+      margin: 0 auto 30px;
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      position: relative;
       user-select: none;
+      animation: fadeInUp 1.4s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
-    .buttons a:hover {
-      background-color: #0097a7;
+    .timer-text {
+      margin-bottom: 8px;
     }
-    #timer {
-      font-size: 1.4em;
+    .progress-bar {
+      width: 100%;
+      height: 14px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: #00bcd4;
+      width: 100%;
+      transition: width 1s linear;
+    }
+
+    /* Отзывы */
+    .reviews {
+      max-width: 600px;
+      margin: 20px auto 50px;
+      text-align: left;
+      font-size: 1rem;
+      font-style: italic;
+      color: #c0d6df;
+      animation: fadeInUp 1.6s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .review {
+      background: rgba(0,0,0,0.3);
+      padding: 15px 20px;
+      border-radius: 15px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 5px rgba(0,188,212,0.3);
+    }
+    .review strong {
+      color: #00bcd4;
       font-weight: 700;
-      background: rgba(0,188,212,0.2);
-      padding: 0.7em 1.2em;
-      border-radius: 25px;
-      letter-spacing: 2px;
-      animation-delay: 0.8s;
-      user-select: none;
-      width: fit-content;
-      margin-bottom: 1.5em;
     }
-    #language-switch {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(0,188,212,0.8);
-      border: none;
+
+    /* Подписка */
+    .subscribe-block {
+      background: rgba(0,0,0,0.3);
+      padding: 25px 20px;
       border-radius: 20px;
-      padding: 8px 15px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #141e30;
+      max-width: 420px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 1.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
       user-select: none;
+    }
+    .subscribe-block p {
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .subscribe-block a {
+      display: inline-block;
+      background: #00bcd4;
+      color: #001f27;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
       transition: background 0.3s ease;
     }
-    #language-switch:hover {
+    .subscribe-block a:hover {
       background: #0097a7;
-      color: white;
     }
+
+    /* Онлайн счетчик */
+    .online-counter {
+      margin-top: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #00bcd4;
+      animation: fadeInUp 2s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    /* Анимации */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
+    /* Мобильные стили */
     @media (max-width: 480px) {
-      h2 { font-size: 1.2em; }
-      #bonus-info, #promo-code, #timer {
-        font-size: 1em;
-        padding: 0 10px;
+      h1 {
+        font-size: 2rem;
       }
-      img { max-width: 90vw; }
-      .buttons a { flex: 1 1 100%; text-align: center; }
-      #language-switch { padding: 6px 12px; top: 8px; right: 8px; }
+      .timer-container {
+        font-size: 1rem;
+      }
+      .btn-play {
+        font-size: 1.1rem;
+        padding: 12px 28px;
+      }
+      .reviews {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<button id="language-switch" aria-label="Switch language">EN</button>
+  <div class="parallax-bg"></div>
 
-<h2 id="bonus-info">🔥 Бонус +500% на первый депозит!</h2>
-<p id="promo-code">Используйте промокод <strong>NF11</strong> и увеличьте свой первый депозит в 5 раз!</p>
+  <div class="container">
 
-<a href="https://1wprde.com" target="_blank" class="image-link" rel="noopener noreferrer">
-  <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
-</a>
+    <!-- Переключатель языка -->
+    <div class="lang-switch" role="group" aria-label="Language switch">
+      <button id="btn-ru" class="active" aria-pressed="true">RU</button>
+      <button id="btn-en" aria-pressed="false">EN</button>
+    </div>
 
-<div class="buttons">
-  <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
-  <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
-  <a href="https://1wprde.com" target="_blank" rel="noopener noreferrer">Играть сейчас</a>
-</div>
+    <h1 id="title">Бонус +500% на первый депозит с промокодом NF11!</h1>
 
-<div id="timer">Бонус доступен еще: 10:00</div>
+    <p id="description">Используйте промокод <strong>NF11</strong> и получите супербонус для начала игры.</p>
 
-<script>
-  const langSwitchBtn = document.getElementById('language-switch');
-  const bonusInfo = document.getElementById('bonus-info');
-  const promoCode = document.getElementById('promo-code');
-  const timerEl = document.getElementById('timer');
-  const buttons = document.querySelectorAll('.buttons a');
+    <!-- Таймер -->
+    <div class="timer-container" aria-live="polite" aria-atomic="true" role="timer">
+      <div class="timer-text" id="timer-text">Бонус доступен ещё: <span id="timer">10:00</span></div>
+      <div class="progress-bar" aria-hidden="true">
+        <div class="progress-bar-inner" id="progress-bar"></div>
+      </div>
+    </div>
 
-  let lang = 'ru';
+    <!-- Картинка -->
+    <a href="https://1wprde.com" target="_blank" class="image-link" rel="noopener noreferrer" aria-label="Перейти к игре">
+      <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
+    </a>
 
-  const texts = {
-    ru: {
-      bonusInfo: '🔥 Бонус +500% на первый депозит!',
-      promoCode: 'Используйте промокод NF11 и увеличьте свой первый депозит в 5 раз!',
-      buttons: ['Telegram', 'Instagram', 'Играть сейчас'],
-      timerPrefix: 'Бонус доступен еще:'
-    },
-    en: {
-      bonusInfo: '🔥 500% Bonus on First Deposit!',
-      promoCode: 'Use promo code NF11 and multiply your first deposit by 5!',
-      buttons: ['Telegram', 'Instagram', 'Play Now'],
-      timerPrefix: 'Bonus available for:'
-    }
-  };
+    <!-- Кнопка Играть -->
+    <a href="https://1wprde.com" target="_blank" class="btn-play" id="btn-play" rel="noopener noreferrer" aria-label="Играть сейчас">
+      Играть сейчас
+    </a>
 
-  function updateLanguage() {
-    if (lang === 'ru') {
-      lang = 'en';
-      langSwitchBtn.textContent = 'RU';
-    } else {
-      lang = 'ru';
-      langSwitchBtn.textContent = 'EN';
-    }
+    <!-- Подписка -->
+    <div class="subscribe-block" id="subscribe-block">
+      <p>Подпишитесь на наш Telegram-канал и получите бонус!</p>
+      <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer" aria-label="Подписаться на Telegram">
+        Подписаться на Telegram
+      </a>
+    </div>
 
-    bonusInfo.textContent = texts[lang].bonusInfo;
-    promoCode.textContent = texts[lang].promoCode;
+    <!-- Онлайн счетчик -->
+    <div class="online-counter" id="online-counter">Сейчас играет: <span id="players-count">...</span></div>
 
-    buttons.forEach((btn, i) => {
-      btn.textContent = texts[lang].buttons[i];
-    });
+    <!-- Отзывы -->
+    <div class="reviews" aria-label="Отзывы пользователей">
+      <div class="review">
+        <strong>Анна:</strong> "Отличный сайт! Получила бонус и выиграла уже в первый день."
+      </div>
+      <div class="review">
+        <strong>John:</strong> "Great bonuses and easy to use. Highly recommend Avia Masters!"
+      </div>
+      <div class="review">
+        <strong>Мария:</strong> "Быстрая регистрация и поддержка. Всем советую!"
+      </div>
+    </div>
 
-    timerEl.textContent = `${texts[lang].timerPrefix} ${timerEl.dataset.time || '10:00'}`;
-  }
+  </div>
 
-  langSwitchBtn.addEventListener('click', updateLanguage);
+  <script>
+    (() => {
+      const ruTexts = {
+        title: "Бонус +500% на первый депозит с промокодом NF11!",
+        description: "Используйте промокод NF11 и получите супербонус для начала игры.",
+        timerText: "Бонус доступен ещё:",
+        btnPlay: "Играть сейчас",
+        subscribeText: "Подпишитесь на наш Telegram-канал и получите бонус!",
+        subscribeBtn: "Подписаться на Telegram",
+        onlineText: "Сейчас играет:"
+      };
+      const enTexts = {
+        title: "Get +500% Bonus on Your First Deposit with Promo Code NF11!",
+        description: "Use promo code NF11 and receive a super bonus to start playing.",
+        timerText: "Bonus available for:",
+        btnPlay: "Play Now",
+        subscribeText: "Subscribe to our Telegram channel and get a bonus!",
+        subscribeBtn: "Subscribe to Telegram",
+        onlineText: "Players online:"
+      };
 
-  // Таймер обратного отсчёта
-  let timeLeft = 600; // 10 минут в секундах
+      // Элементы
+      const btnRu = document.getElementById("btn-ru");
+      const btnEn = document.getElementById("btn-en");
+      const title = document.getElementById("title");
+      const description = document.getElementById("description");
+      const timerText = document.getElementById("timer-text");
+      const btnPlay = document.getElementById("btn-play");
+      const subscribeBlock = document.getElementById("subscribe-block");
+      const onlineCounter = document.getElementById("online-counter");
+      const playersCount = document.getElementById("players-count");
 
-  function updateTimer() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    const formatted = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+      // Переключатель языка
+      function setLanguage(lang) {
+        if (lang === "ru") {
+          title.textContent = ruTexts.title;
+          description.innerHTML = ruTexts.description.replace("NF11", "<strong>NF11</strong>");
+          timerText.textContent = ruTexts.timerText;
+          btnPlay.textContent = ruTexts.btnPlay;
+          subscribeBlock.querySelector("p").textContent = ruTexts.subscribeText;
+          subscribeBlock.querySelector("a").textContent = ruTexts.subscribeBtn;
+          onlineCounter.childNodes[0].nodeValue = ruTexts.onlineText + " ";
+          btnRu.classList.add("active");
+          btnEn.classList.remove("active");
+          btnRu.setAttribute("aria-pressed", "true");
+          btnEn.setAttribute("aria-pressed", "false");
+        } else {
+          title.textContent = enTexts.title;
+          description.innerHTML = enTexts.description.replace("NF11", "<strong>NF11</strong>");
+          timerText.textContent = enTexts.timerText;
+          btnPlay.textContent = enTexts.btnPlay;
+          subscribeBlock.querySelector("p").textContent = enTexts.subscribeText;
+          subscribeBlock.querySelector("a").textContent = enTexts.subscribeBtn;
+          onlineCounter.childNodes[0].nodeValue = enTexts.onlineText + " ";
+          btnEn.classList.add("active");
+          btnRu.classList.remove("active");
+          btnEn.setAttribute("aria-pressed", "true");
+          btnRu.setAttribute("aria-pressed", "false");
+        }
+      }
 
-    timerEl.textContent = `${texts[lang].timerPrefix} ${formatted}`;
-    timerEl.dataset.time = formatted;
+      btnRu.addEventListener("click", () => setLanguage("ru"));
+      btnEn.addEventListener("click", () => setLanguage("en"));
 
-    if(timeLeft > 0) {
-      timeLeft--;
-    } else {
-      // Можно добавить действия по окончании таймера, например, скрыть бонус
-      clearInterval(timerInterval);
-      timerEl.textContent = lang === 'ru' ? 'Время бонуса истекло' : 'Bonus time expired';
-    }
-  }
+      // Изначально русский
+      setLanguage("ru");
 
-  const timerInterval = setInterval(updateTimer, 1000);
+      // Таймер 10 минут (600 секунд)
+      const timerEl = document.getElementById("timer");
+      const progressBar = document.getElementById("progress-bar");
+      const totalSeconds = 600;
+      let secondsLeft = totalSeconds;
 
-  // Инициализация
-  updateTimer();
-</script>
+      function updateTimer() {
+        const minutes = Math.floor(secondsLeft / 60);
+        const seconds = secondsLeft % 60;
+        timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        // Прогресс-бар %
+        const percent = (secondsLeft / totalSeconds) * 100;
+        progressBar.style.width = percent + '%';
+
+        if (secondsLeft > 0) {
+          secondsLeft--;
+        } else {
+          // Таймер закончился
+          clearInterval(timerInterval);
+          // Можно обновлять или что-то еще
+        }
+      }
+      updateTimer();
+      const timerInterval = setInterval(updateTimer, 1000);
+
+      // Онлайн счетчик - рандом от 120 до 250 игроков с обновлением каждую 20сек
+      function updatePlayersCount() {
+        const count = Math.floor(Math.random() * (250 - 120 + 1)) + 120;
+        playersCount.textContent = count;
+      }
+      updatePlayersCount();
+      setInterval(updatePlayersCount, 20000);
+
+      // Плавное появление кнопки "Играть сейчас" через 3 секунды
+      setTimeout(() => {
+        btnPlay.classList.add("visible");
+      }, 3000);
+
+      // Плавное появление остальных элементов (параллельно)
+      const fadeElems = [
+        description,
+        subscribeBlock,
+        onlineCounter,
+        ...document.querySelectorAll('.reviews'),
+      ];
+      fadeElems.forEach(el => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, 1200);
+      });
+    })();
+  </script>
 
 </body>
 </html>
