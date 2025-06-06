@@ -31,6 +31,7 @@
     .fade-delay-1 { animation-delay: 0.3s; }
     .fade-delay-2 { animation-delay: 0.6s; }
     .fade-delay-3 { animation-delay: 0.9s; }
+    .fade-delay-4 { animation-delay: 1.2s; }
 
     @keyframes fadeInUp {
       to {
@@ -77,8 +78,15 @@
 
     .main-text {
       max-width: 600px;
-      margin-bottom: 1.2em;
+      margin-bottom: 0.4em;
       font-size: 1.2em;
+    }
+
+    .promo-usage {
+      font-size: 1em;
+      color: #00ffcc;
+      margin-bottom: 1.2em;
+      font-weight: bold;
     }
 
     a.image-link {
@@ -187,6 +195,10 @@
     Получи +500% к первому депозиту! Используй промокод: NF11
   </p>
 
+  <p id="promo-usage" class="promo-usage fade-in-up fade-delay-4">
+    Промокод использовали уже 0 раза!
+  </p>
+
   <a href="https://1wprde.com" target="_blank"
      class="image-link fade-in-up fade-delay-3" rel="noopener noreferrer">
     <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
@@ -226,6 +238,18 @@
     }
     window.addEventListener('DOMContentLoaded', () => {
       applyLanguage(currentLang);
+
+      // Рандомный счётчик использования промокода
+      const usageEl = document.getElementById('promo-usage');
+      const min = 1000;
+      const max = 2000;
+      const randomUsage = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      if (currentLang === 'ru') {
+        usageEl.textContent = `Промокод использовали уже ${randomUsage} раза!`;
+      } else {
+        usageEl.textContent = `Promo code used ${randomUsage} times already!`;
+      }
     });
   </script>
 </body>
