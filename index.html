@@ -21,33 +21,23 @@
       box-sizing: border-box;
       overflow-x: hidden;
     }
-    h2, p {
-      margin: 10px 0;
+    h2, p, #bonus-info, #promo-code, #timer, .buttons, a.image-link {
       opacity: 0;
       animation: fadeInUp 1s forwards;
     }
-    h2 {
-      font-size: 1.5em;
-      animation-delay: 0.2s;
-    }
-    p {
-      font-size: 1.1em;
-      animation-delay: 0.4s;
-    }
-    a.image-link {
+    h2 { animation-delay: 0.2s; font-size: 1.5em; margin-bottom: 0.2em; }
+    #bonus-info { animation-delay: 0.4s; font-size: 1.2em; margin-bottom: 0.3em; }
+    #promo-code { animation-delay: 0.5s; font-weight: bold; margin-bottom: 1.5em; font-size: 1.1em; }
+    a.image-link { 
       display: inline-block;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      margin: 1.5em 0;
+      margin-bottom: 1.5em;
       transition: transform 0.3s ease;
-      opacity: 0;
-      animation: fadeInUp 1s forwards;
       animation-delay: 0.6s;
     }
-    a.image-link:hover {
-      transform: scale(1.05);
-    }
+    a.image-link:hover { transform: scale(1.05); }
     img {
       max-width: 320px;
       width: 100%;
@@ -59,9 +49,8 @@
       gap: 1em;
       flex-wrap: wrap;
       justify-content: center;
-      opacity: 0;
-      animation: fadeInUp 1s forwards;
-      animation-delay: 0.8s;
+      animation-delay: 0.7s;
+      margin-bottom: 2em;
     }
     .buttons a {
       padding: 0.8em 1.5em;
@@ -76,26 +65,35 @@
     .buttons a:hover {
       background-color: #0097a7;
     }
-    /* Видео блок */
-    .video-container {
-      margin-top: 2em;
-      max-width: 360px;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      opacity: 0;
-      animation: fadeInUp 1s forwards;
-      animation-delay: 1s;
+    #timer {
+      font-size: 1.4em;
+      font-weight: 700;
+      background: rgba(0,188,212,0.2);
+      padding: 0.7em 1.2em;
+      border-radius: 25px;
+      letter-spacing: 2px;
+      animation-delay: 0.8s;
+      user-select: none;
+      width: fit-content;
+      margin-bottom: 1.5em;
     }
-    video {
-      width: 100%;
-      display: block;
+    #language-switch {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,188,212,0.8);
+      border: none;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #141e30;
+      user-select: none;
+      transition: background 0.3s ease;
     }
-    .video-caption {
-      margin-top: 0.5em;
-      font-size: 1em;
-      color: #a0e9ff;
+    #language-switch:hover {
+      background: #0097a7;
+      color: white;
     }
     @keyframes fadeInUp {
       from {
@@ -108,44 +106,106 @@
       }
     }
     @media (max-width: 480px) {
-      h2 {
-        font-size: 1.2em;
-      }
-      p {
+      h2 { font-size: 1.2em; }
+      #bonus-info, #promo-code, #timer {
         font-size: 1em;
         padding: 0 10px;
       }
-      img {
-        max-width: 90vw;
-      }
-      .buttons a {
-        flex: 1 1 100%;
-        text-align: center;
-      }
-      .video-container {
-        max-width: 90vw;
-      }
+      img { max-width: 90vw; }
+      .buttons a { flex: 1 1 100%; text-align: center; }
+      #language-switch { padding: 6px 12px; top: 8px; right: 8px; }
     }
   </style>
 </head>
 <body>
-  <h2>🔥 Бонус +500% на первый депозит! Используйте промокод <strong>NF11</strong></h2>
-  <p>Не упустите шанс увеличить свой первый депозит в 5 раз!</p>
-  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer">
-    <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
-  </a>
-  <div class="buttons">
-    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
-    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer">Играть сейчас</a>
-  </div>
 
-  <div class="video-container">
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.pixabay.com/vimeo/508560768/slot-machines-52462.mp4?width=640&hash=1d8e2d1e6f7d6b3d3e6e1b2c4e2c0a3c0c5f56f8" type="video/mp4" />
-      Ваш браузер не поддерживает видео.
-    </video>
-    <div class="video-caption">Смотрите, как наши игроки выигрывают реальные деньги!</div>
-  </div>
+<button id="language-switch" aria-label="Switch language">EN</button>
+
+<h2 id="bonus-info">🔥 Бонус +500% на первый депозит!</h2>
+<p id="promo-code">Используйте промокод <strong>NF11</strong> и увеличьте свой первый депозит в 5 раз!</p>
+
+<a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer">
+  <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
+</a>
+
+<div class="buttons">
+  <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
+  <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
+  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer">Играть сейчас</a>
+</div>
+
+<div id="timer">Бонус доступен еще: 10:00</div>
+
+<script>
+  const langSwitchBtn = document.getElementById('language-switch');
+  const bonusInfo = document.getElementById('bonus-info');
+  const promoCode = document.getElementById('promo-code');
+  const timerEl = document.getElementById('timer');
+  const buttons = document.querySelectorAll('.buttons a');
+
+  let lang = 'ru';
+
+  const texts = {
+    ru: {
+      bonusInfo: '🔥 Бонус +500% на первый депозит!',
+      promoCode: 'Используйте промокод NF11 и увеличьте свой первый депозит в 5 раз!',
+      buttons: ['Telegram', 'Instagram', 'Играть сейчас'],
+      timerPrefix: 'Бонус доступен еще:'
+    },
+    en: {
+      bonusInfo: '🔥 500% Bonus on First Deposit!',
+      promoCode: 'Use promo code NF11 and multiply your first deposit by 5!',
+      buttons: ['Telegram', 'Instagram', 'Play Now'],
+      timerPrefix: 'Bonus available for:'
+    }
+  };
+
+  function updateLanguage() {
+    if (lang === 'ru') {
+      lang = 'en';
+      langSwitchBtn.textContent = 'RU';
+    } else {
+      lang = 'ru';
+      langSwitchBtn.textContent = 'EN';
+    }
+
+    bonusInfo.textContent = texts[lang].bonusInfo;
+    promoCode.textContent = texts[lang].promoCode;
+
+    buttons.forEach((btn, i) => {
+      btn.textContent = texts[lang].buttons[i];
+    });
+
+    timerEl.textContent = `${texts[lang].timerPrefix} ${timerEl.dataset.time || '10:00'}`;
+  }
+
+  langSwitchBtn.addEventListener('click', updateLanguage);
+
+  // Таймер обратного отсчёта
+  let timeLeft = 600; // 10 минут в секундах
+
+  function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    const formatted = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    timerEl.textContent = `${texts[lang].timerPrefix} ${formatted}`;
+    timerEl.dataset.time = formatted;
+
+    if(timeLeft > 0) {
+      timeLeft--;
+    } else {
+      // Можно добавить действия по окончании таймера, например, скрыть бонус
+      clearInterval(timerInterval);
+      timerEl.textContent = lang === 'ru' ? 'Время бонуса истекло' : 'Bonus time expired';
+    }
+  }
+
+  const timerInterval = setInterval(updateTimer, 1000);
+
+  // Инициализация
+  updateTimer();
+</script>
+
 </body>
 </html>
