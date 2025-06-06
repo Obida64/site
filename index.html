@@ -200,6 +200,12 @@
     Получи +500% к первому депозиту! Используй промокод: NF11
   </p>
 
+  <p id="bonus-left-counter" class="promo-usage pop-in pop-delay-2"
+     data-ru="Осталось 15 бонусов из 100"
+     data-en="15 bonuses left out of 100">
+    Осталось 15 бонусов из 100
+  </p>
+
   <p id="promo-usage" class="promo-usage pop-in pop-delay-3">
     Промокод использовали уже 0 раза!
   </p>
@@ -241,6 +247,7 @@
         el.textContent = el.getAttribute('data-' + lang);
       });
     }
+
     function toggleLanguage() {
       currentLang = currentLang === 'ru' ? 'en' : 'ru';
       applyLanguage(currentLang);
@@ -251,14 +258,20 @@
 
       setTimeout(() => {
         const usageEl = document.getElementById('promo-usage');
-        const min = 1000;
-        const max = 2000;
-        const randomUsage = Math.floor(Math.random() * (max - min + 1)) + min;
+        const bonusLeftEl = document.getElementById('bonus-left-counter');
+
+        const minUsage = 1000, maxUsage = 2000;
+        const minLeft = 10, maxLeft = 30;
+
+        const randomUsage = Math.floor(Math.random() * (maxUsage - minUsage + 1)) + minUsage;
+        const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
 
         if (currentLang === 'ru') {
-          usageEl.textContent = `Промокод использовали уже ${randomUsage} раза!`;
+          usageEl.textContent = `Промокод использовали уже ${randomUsage} раз!`;
+          bonusLeftEl.textContent = `Осталось ${randomLeft} бонусов из 100`;
         } else {
           usageEl.textContent = `Promo code used ${randomUsage} times already!`;
+          bonusLeftEl.textContent = `${randomLeft} bonuses left out of 100`;
         }
       }, 1400);
     });
