@@ -19,6 +19,7 @@
       text-align: center;
       padding: 20px;
       box-sizing: border-box;
+      transition: background-color 0.3s ease;
     }
     h1 {
       font-size: 3em;
@@ -51,6 +52,7 @@
       gap: 1em;
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: 1.5em;
     }
     .buttons a {
       padding: 0.8em 1.5em;
@@ -64,6 +66,23 @@
     }
     .buttons a:hover {
       background-color: #0097a7;
+    }
+    .lang-switch {
+      margin-bottom: 2em;
+    }
+    .lang-switch button {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 0.4em 1em;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .lang-switch button:hover {
+      background-color: white;
+      color: #243b55;
     }
     @media (max-width: 480px) {
       h1 {
@@ -84,15 +103,55 @@
   </style>
 </head>
 <body>
-  <h1>Добро пожаловать!</h1>
-  <p>Это официальный сайт Avia Masters. Жми ниже и играй прямо сейчас!</p>
-  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer">
+  <div class="lang-switch">
+    <button id="langToggle">English</button>
+  </div>
+
+  <h1 id="title">Добро пожаловать!</h1>
+  <p id="description">Это официальный сайт Avia Masters. Жми ниже и играй прямо сейчас!</p>
+  <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" class="image-link" rel="noopener noreferrer" id="imageLink">
     <img src="https://raw.githubusercontent.com/Obida64/site/main/avia.jpg" alt="Avia Masters" />
   </a>
   <div class="buttons">
-    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer">Telegram</a>
-    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer">Играть сейчас</a>
+    <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer" id="btnTelegram">Telegram</a>
+    <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer" id="btnInstagram">Instagram</a>
+    <a href="https://1wzyuh.com/casino/list?open=register&p=scdi" target="_blank" rel="noopener noreferrer" id="btnPlay">Играть сейчас</a>
   </div>
+
+  <script>
+    const langToggleBtn = document.getElementById('langToggle');
+
+    const texts = {
+      ru: {
+        title: "Добро пожаловать!",
+        description: "Это официальный сайт Avia Masters. Жми ниже и играй прямо сейчас!",
+        btnTelegram: "Telegram",
+        btnInstagram: "Instagram",
+        btnPlay: "Играть сейчас",
+        langBtn: "English"
+      },
+      en: {
+        title: "Welcome!",
+        description: "This is the official Avia Masters website. Click below and play now!",
+        btnTelegram: "Telegram",
+        btnInstagram: "Instagram",
+        btnPlay: "Play Now",
+        langBtn: "Русский"
+      }
+    };
+
+    let currentLang = 'ru';
+
+    langToggleBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'ru' ? 'en' : 'ru';
+
+      document.getElementById('title').textContent = texts[currentLang].title;
+      document.getElementById('description').textContent = texts[currentLang].description;
+      document.getElementById('btnTelegram').textContent = texts[currentLang].btnTelegram;
+      document.getElementById('btnInstagram').textContent = texts[currentLang].btnInstagram;
+      document.getElementById('btnPlay').textContent = texts[currentLang].btnPlay;
+      langToggleBtn.textContent = texts[currentLang].langBtn;
+    });
+  </script>
 </body>
 </html>
