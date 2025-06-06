@@ -22,21 +22,20 @@
       overflow-x: hidden;
     }
 
-    .fade-in-up {
+    .pop-in {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease-out forwards;
+      transform: scale(0.95) translateY(20px);
+      animation: popIn 0.8s ease-out forwards;
     }
 
-    .fade-delay-1 { animation-delay: 0.3s; }
-    .fade-delay-2 { animation-delay: 0.6s; }
-    .fade-delay-3 { animation-delay: 0.9s; }
-    .fade-delay-4 { animation-delay: 1.2s; }
+    .pop-delay-1 { animation-delay: 0.4s; }
+    .pop-delay-2 { animation-delay: 0.8s; }
+    .pop-delay-3 { animation-delay: 1.2s; }
 
-    @keyframes fadeInUp {
+    @keyframes popIn {
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1) translateY(0);
       }
     }
 
@@ -136,7 +135,6 @@
       box-shadow: 0 8px 15px rgba(0, 188, 212, 0.6);
     }
 
-    /* Пульсирующая анимация для кнопки "Играть сейчас" */
     .buttons a.pulse {
       animation: pulse-animation 2s infinite;
       box-shadow: 0 0 8px 0 rgba(0, 188, 212, 0.7);
@@ -184,18 +182,18 @@
     <button onclick="toggleLanguage()">EN / RU</button>
   </div>
 
-  <div class="timer-container fade-in-up fade-delay-1">
+  <div class="timer-container pop-in pop-delay-1">
     <span id="timer-text" data-ru="🔥 Бонус доступен ещё:" data-en="🔥 Bonus available for:">🔥 Бонус доступен ещё:</span>
     <span id="countdown">10:00</span>
   </div>
 
-  <p class="main-text fade-in-up fade-delay-2"
+  <p class="main-text pop-in pop-delay-2"
      data-ru="Получи +500% к первому депозиту! Используй промокод: NF11"
      data-en="Get +500% on your first deposit! Use promo code: NF11">
     Получи +500% к первому депозиту! Используй промокод: NF11
   </p>
 
-  <p id="promo-usage" class="promo-usage fade-in-up fade-delay-4">
+  <p id="promo-usage" class="promo-usage pop-in pop-delay-3">
     Промокод использовали уже 0 раза!
   </p>
 
@@ -212,7 +210,6 @@
   </div>
 
   <script>
-    // Таймер
     let time = 10 * 60;
     const countdownEl = document.getElementById('countdown');
     function updateTimer() {
@@ -225,7 +222,6 @@
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
-    // Язык
     let currentLang = 'ru';
     function applyLanguage(lang) {
       document.querySelectorAll('[data-' + lang + ']').forEach(el => {
@@ -236,20 +232,22 @@
       currentLang = currentLang === 'ru' ? 'en' : 'ru';
       applyLanguage(currentLang);
     }
+
     window.addEventListener('DOMContentLoaded', () => {
       applyLanguage(currentLang);
 
-      // Рандомный счётчик использования промокода
-      const usageEl = document.getElementById('promo-usage');
-      const min = 1000;
-      const max = 2000;
-      const randomUsage = Math.floor(Math.random() * (max - min + 1)) + min;
+      setTimeout(() => {
+        const usageEl = document.getElementById('promo-usage');
+        const min = 1000;
+        const max = 2000;
+        const randomUsage = Math.floor(Math.random() * (max - min + 1)) + min;
 
-      if (currentLang === 'ru') {
-        usageEl.textContent = `Промокод использовали уже ${randomUsage} раза!`;
-      } else {
-        usageEl.textContent = `Promo code used ${randomUsage} times already!`;
-      }
+        if (currentLang === 'ru') {
+          usageEl.textContent = `Промокод использовали уже ${randomUsage} раза!`;
+        } else {
+          usageEl.textContent = `Promo code used ${randomUsage} times already!`;
+        }
+      }, 1400);
     });
   </script>
 </body>
