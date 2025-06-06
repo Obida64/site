@@ -20,7 +20,6 @@
       justify-content: center;
       align-items: center;
       overflow-x: hidden;
-      position: relative;
     }
 
     .pop-in {
@@ -163,6 +162,13 @@
       }
     }
 
+    .buttons a svg {
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
     @media (max-width: 480px) {
       .main-text {
         font-size: 1em;
@@ -175,51 +181,6 @@
         flex: 1 1 100%;
         text-align: center;
       }
-    }
-
-    /* Popup */
-    .popup {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #00bcd4;
-      color: white;
-      padding: 1em 1.5em;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      z-index: 999;
-      display: none;
-      animation: slideIn 0.6s ease-out forwards;
-    }
-
-    @keyframes slideIn {
-      0% {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .popup a {
-      display: block;
-      margin-top: 0.5em;
-      color: white;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .popup-close {
-      position: absolute;
-      top: 4px;
-      right: 8px;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.2em;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -256,24 +217,15 @@
 
   <div class="buttons fade-in-up fade-delay-3">
     <a href="https://t.me/+kVAoDT795kxjODEy" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-      <!-- Telegram SVG -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><path d="..."/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><path d="M120 0C53.73 0 0 53.73 0 120s53.73 120 120 120 120-53.73 120-120S186.27 0 120 0zm55.707 80.568l-17.235 81.27c-1.3 5.772-4.682 7.173-9.492 4.473l-26.224-19.34-12.65 12.182c-1.396 1.396-2.567 2.567-5.267 2.567l1.878-26.507 48.328-43.61c2.104-1.878-.456-2.914-3.267-.967l-59.7 37.63-25.728-8.045c-5.59-1.748-5.678-5.59 1.156-8.243l99.69-38.454c4.615-1.747 8.629 1.104 7.51 8.044z"/></svg>
     </a>
 
     <a href="https://www.instagram.com/zanosnaia?igsh=dDdwaHBwczF1ODk1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <!-- Instagram SVG -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 169.063 169.063"><path d="..."/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 169.063 169.063"><path d="M122.406,0H46.657C20.928,0,0,20.927,0,46.657v75.749c0,25.729,20.928,46.657,46.657,46.657h75.749 c25.729,0,46.657-20.928,46.657-46.657V46.657C169.063,20.927,148.135,0,122.406,0z M84.531,129.398 c-24.773,0-44.867-20.094-44.867-44.867S59.758,39.663,84.531,39.663s44.867,20.094,44.867,44.867 S109.304,129.398,84.531,129.398z M140.344,44.335c-5.437,0-9.844-4.407-9.844-9.844s4.407-9.844,9.844-9.844 c5.437,0,9.844,4.407,9.844,9.844S145.781,44.335,140.344,44.335z"/></svg>
     </a>
 
     <a href="https://1wprde.com" target="_blank" rel="noopener noreferrer" class="pulse"
        data-ru="Играть сейчас" data-en="Play Now">Играть сейчас</a>
-  </div>
-
-  <!-- Popup Surprise -->
-  <div class="popup" id="popup-surprise">
-    <button class="popup-close" onclick="document.getElementById('popup-surprise').style.display='none'">&times;</button>
-    🎁 Сюрприз! Получи ещё больше бонусов!
-    <a href="https://1wprde.com" target="_blank" rel="noopener noreferrer">Перейти к бонусу</a>
   </div>
 
   <script>
@@ -282,7 +234,7 @@
     function updateTimer() {
       const minutes = Math.floor(time / 60);
       const seconds = time % 60;
-      countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      countdownEl.textContent = ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')};
       if (time > 0) time--;
       else clearInterval(timerInterval);
     }
@@ -315,18 +267,13 @@
         const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
 
         if (currentLang === 'ru') {
-          usageEl.textContent = `Промокод использовали уже ${randomUsage} раз!`;
-          bonusLeftEl.textContent = `Осталось ${randomLeft} бонусов из 100`;
+          usageEl.textContent = Промокод использовали уже ${randomUsage} раз!;
+          bonusLeftEl.textContent = Осталось ${randomLeft} бонусов из 100;
         } else {
-          usageEl.textContent = `Promo code used ${randomUsage} times already!`;
-          bonusLeftEl.textContent = `${randomLeft} bonuses left out of 100`;
+          usageEl.textContent = Promo code used ${randomUsage} times already!;
+          bonusLeftEl.textContent = ${randomLeft} bonuses left out of 100;
         }
       }, 1400);
-
-      setTimeout(() => {
-        const popup = document.getElementById('popup-surprise');
-        popup.style.display = 'block';
-      }, 6000); // Показываем через 6 секунд
     });
   </script>
 </body>
